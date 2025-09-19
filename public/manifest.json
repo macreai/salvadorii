@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Salvadorii",
+  "version": "1.0.0",
+  "description": "Documentation Assitant Powered by LLM",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs", "scripting", "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ]
+}
