@@ -3,7 +3,6 @@ import xml.etree.ElementTree as ET
 from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 
-
 def _filter_urls(urls: list[str]) -> list[str]:
     """Keep only URLs with allowed extensions (HTML, PDF, DOCX, etc.)."""
     allowed_ext = (".html", ".htm", ".pdf", ".docx", ".pptx", ".txt", ".md", "/")
