@@ -10,9 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@google/genai": "^1.17.0",
+    "@google/genai": "^1.21.0",
+    "@huggingface/transformers": "^3.7.3",
+    "@langchain/community": "^0.3.56",
+    "@langchain/core": "^0.3.77",
+    "@langchain/textsplitters": "^0.1.0",
     "@tailwindcss/vite": "^4.1.13",
-    "axios": "^1.11.0",
+    "@types/chrome": "^0.1.12",
+    "cheerio": "^1.1.2",
+    "langchain": "^0.3.34",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.13",

@@ -7,9 +7,20 @@
     "default_popup": "index.html"
   },
   "permissions": [
-    "tabs", "scripting", "activeTab"
+    "tabs", "scripting", "activeTab", "storage", "unlimitedStorage"
   ],
   "host_permissions": [
     "<all_urls>"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "onnxruntime/*.wasm", "transformers/**"
+      ],
+      "matches": ["<all_urls>"]
+    }
   ]
 }

@@ -5,8 +5,9 @@ from consts.app import converter, output_file
 
 def chunking_doc(output_file):
 
-    EMBED_MODEL_ID = "sentence-transformers/all-MiniLM-L6-v2"
-    MAX_TOKENS = 64
+    EMBED_MODEL_ID = "BAAI/bge-large-en-v1.5"
+    # EMBED_MODEL_ID = "sentence-transformers/all-mpnet-base-v2"
+    MAX_TOKENS = 256
 
     tokenizer = HuggingFaceTokenizer(
         tokenizer=AutoTokenizer.from_pretrained(EMBED_MODEL_ID),
@@ -32,5 +33,3 @@ if __name__ == "__main__":
     docs = chunking_doc(output_file=output_file)
     print(f"Total chunks: {len(docs)}")
     print(docs[0][:300], "…")
-
-

@@ -30,12 +30,9 @@ def store_data(conn: connection, cur: cursor, url: str, docs, embedded):
     cur.close()
     conn.close()
 
-
 if __name__ == "__main__":
     conn, cur = create_connection(dbname="salvadorii", user="postgres", password="root", host="localhost", port="5432")
     docs = chunking_doc(output_file=output_file)
     embedded = embed_doc(docs)
     store_data(conn, cur, "https://docs.soliditylang.org/en/v0.8.30/", docs, embedded)
     print("SUCCESS")
-    del docs, embedded
-    gc.collect()
