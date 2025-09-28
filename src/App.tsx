@@ -42,36 +42,65 @@
 // export default App;
 
 import './App.css';
-import LiquidGlassContainer from './components/common/LiquidGlassContainer';
+import LiquidGlassContainer from './components/LiquidGlassContainer';
 
 function App() {
-
-  const url = "URL Check URL Check URL Check URL Check "
+  const url = "URL";
 
   return (
-      <>        
+    <div className="flex flex-col">
+      <main className="flex-1">
         <div className="flex flex-col gap-4 mb-4">
-
           <div className="flex items-center gap-3">
-            <LiquidGlassContainer className='flex items-center justify-center w-30 h-30 rounded-2xl'>
-              <img src="/logo.png" alt="Logo" className="w-30 h-30 object-cover scale-110" />
+            <LiquidGlassContainer className="flex items-center justify-center w-20 h-20 rounded-4xl">
+              <img
+                src="/logo.png"
+                alt="Logo"
+                className="w-20 h-20 object-cover scale-110"
+              />
             </LiquidGlassContainer>
 
-            <LiquidGlassContainer className='flex items-center justify-center w-70 h-30 px-3 text-white rounded-2xl'>
+            <LiquidGlassContainer className="flex items-center justify-center w-70 h-20 px-3 text-white rounded-4xl">
               <span className="truncate text-nowrap">
                 {url.length > 30 ? url.slice(0, 30) + '...' : url}
               </span>
             </LiquidGlassContainer>
           </div>
-
-
         </div>
 
+        <div className="max-w-lg mx-auto space-y-6">
+          <LiquidGlassContainer className="w-full h-60 flex flex-col p-4 overflow-y-auto rounded-4xl">
+            <div className="flex-1 space-y-2 text-white/80">
+              
+            </div>
+          </LiquidGlassContainer>
 
-        <LiquidGlassContainer className='h-100'>
-          Hello
-        </LiquidGlassContainer>
-      </>
+          <div className="flex items-center gap-3 w-full">
+            <LiquidGlassContainer className="flex-1 rounded-4xl">
+              <input
+                type="text"
+                className="w-full bg-transparent outline-none text-white placeholder-white/70"
+                placeholder="Ask your question"
+              />
+            </LiquidGlassContainer>
+            <LiquidGlassContainer className='rounded-4xl'>
+              <button
+                onClick={() => alert('OK!')}
+                className="bg-transparent text-white"
+              >
+                Send
+              </button>
+            </LiquidGlassContainer>
+          </div>
+        </div>
+        <div className="w-full py-4 mt-6">
+          <div className="max-w-lg mx-auto">
+              © {new Date().getFullYear()} Salvadorii · by Macreai
+          </div>
+        </div>
+      </main>
+
+    </div>
   );
 }
 
