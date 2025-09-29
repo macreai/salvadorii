@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { rag } from '../core'
 import type { Chat } from '@google/genai'
 
 type Store = {
@@ -16,8 +15,8 @@ export const useStore = create<Store>()((set, get) => ({
             const activeTab = tabs[0];
             if (activeTab.url) {
                 set({ url: activeTab.url })
-                const chatResult = await rag(activeTab.url, "What is Principal?");
-                set({ chat: chatResult });
+                // const chatResult = await rag(activeTab.url, "What is Principal?");
+                // set({ chat: chatResult });
             }
         });
     },

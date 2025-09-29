@@ -3,11 +3,11 @@
   "name": "Salvadorii",
   "version": "1.0.0",
   "description": "Documentation Assitant Powered by LLM",
-  "action": {
-    "default_popup": "index.html"
+  "side_panel": {
+    "default_path": "index.html"
   },
   "permissions": [
-    "tabs", "scripting", "activeTab", "storage", "unlimitedStorage"
+    "tabs", "scripting", "activeTab", "storage", "unlimitedStorage", "sidePanel"
   ],
   "host_permissions": [
     "<all_urls>"

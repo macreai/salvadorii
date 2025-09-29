@@ -3,7 +3,6 @@ import { storage } from "../model/storage";
 import { chunk } from "./chunk";
 import { collect } from "./collect";
 import { store } from "./store_embed";
-import { chatbot } from "./chatbot";
 
 export const rag = async (url: string, query: string) => {
 
@@ -38,8 +37,10 @@ export const rag = async (url: string, query: string) => {
         .map(r => r.pageContent) 
         .join("\n\n");           
 
-    const chat = await chatbot("", combinedText);
+    // const chat = await chatbot("", combinedText);
 
-    return chat;
+    // return chat;
+
+    return combinedText;
 
 };
