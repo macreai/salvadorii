@@ -1,55 +1,47 @@
-// import { GoogleGenAI } from "@google/genai";
+import { EventEmitter } from "events";
+import { rag } from "./rag";
 
-// let ai: GoogleGenAI;
+declare const LanguageModel: any;
 
-// export const chatbot = async (apiKey: string, context: string) => {
+const initChatbot = async () => {
+    const emitter = new EventEmitter();
 
-//     if (!ai) {
-//         ai = new GoogleGenAI({
-//             apiKey: apiKey
-//         })
-//     }
-
-//     const prompt = `
-//         Use this context to answer the question.
-
-//         Context : ${context}
-//     `;
-
-//     const chat = await ai.chats.create({
-//         model: "gemini-2.5-pro",
-//         history: [
-//             {
-//                 role: "user",
-//                 parts: [
-//                     {
-//                         text: prompt
-//                     }
-//                 ]
-//             },
-//             {
-//                 role: "model",
-//                 parts: [
-//                     {
-//                         text: "I understand!"
-//                     }
-//                 ]
-//             }
-//         ]
-//     });
-
-//     return chat;
-// }
-declare const LanguageModel: any; 
-
-export const chatbot = async () => {
     const session = await LanguageModel.create({
         monitor(m: any) {
             m.addEventListener("downloadprogress", (e: any) => {
-            console.log(`Downloaded ${e.loaded * 100}%`);
+                emitter.emit("progress", e);
             });
         },
+        initialPrompts: [
+            { role: 'system', content: 'You are a helpful and friendly documentation assistant.' },
+        ]
     });
 
-    return session
+    return { session, emitter };
+};
+
+export const chatBot = async (url: string, query: string) => {
+
+    const { session, emitter } = await initChatbot();
+
+    const context = await rag(url, query);
+
+    const prompt = `
+        Use this context to answer the question.
+        If you are not sure, just say "I do not know"
+
+        Context : ${context}
+
+        Question : ${query}
+    `;
+
+    const result = await session.prompt(prompt);
+
+    return { result, emitter };
 }
+// use example
+// const { session, emitter } = await chatbot();
+
+// emitter.on("progress", (e) => {
+//     console.log("Progress dari luar:", e.loaded);
+// });

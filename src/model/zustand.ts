@@ -1,31 +1,26 @@
 import { create } from 'zustand'
-import type { Chat } from '@google/genai'
+import { EventEmitter } from "events";
+import { chatBot } from '../core/chatbot'
 
 type Store = {
   url: string
   setUrl: () => void
-  chat?: Chat
-  question: (question: string) => Promise<string | undefined>
+  result?: string
+  emitter?: EventEmitter
 }
 
-export const useStore = create<Store>()((set, get) => ({
+export const useStore = create<Store>()((set) => ({
     url: "",
     setUrl: () => {
         chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
             const activeTab = tabs[0];
             if (activeTab.url) {
                 set({ url: activeTab.url })
-                // const chatResult = await rag(activeTab.url, "What is Principal?");
-                // set({ chat: chatResult });
+                const { result, emitter } = await chatBot(activeTab.url, "What is Principal?");
+                set({ result, emitter });
             }
         });
     },
-    question: async (question: string) => {
-        const chat = get().chat;
-        if (!chat) return undefined;
-
-        const response = await chat.sendMessage({ message: question });
-        return response?.text
-    }
-
+    result: "",
+    emitter: new EventEmitter()
 }))

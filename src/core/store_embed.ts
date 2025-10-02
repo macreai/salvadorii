@@ -58,7 +58,7 @@ export const store = async (chunks: string[]) => {
         console.log("[EXT] Model not loaded, loading...");
         extractor = await pipeline("feature-extraction", "Xenova/bge-base-en-v1.5", {
             device: "wasm",
-            dtype: "fp32",
+            dtype: "auto",
             progress_callback: progressCallback,
         });
         console.log("[EXT] Model ready");

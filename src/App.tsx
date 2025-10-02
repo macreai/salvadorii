@@ -41,17 +41,19 @@
 
 // export default App;
 
+import { useEffect } from 'react';
 import './App.css';
 import LiquidGlassContainer from './components/LiquidGlassContainer';
-import { chatbot } from './core/chatbot';
+import { useStore } from './model/zustand';
 
 function App() {
-  const url = "URL";
-
-  const session = chatbot
-  console.log(session)
-  console.log("VALID")
   
+  const { url, setUrl, result } = useStore();
+
+  useEffect(() => {
+    setUrl();
+  }, []);
+
   return (
     <div className="flex flex-col">
       <main className="flex-1">
@@ -76,9 +78,10 @@ function App() {
         <div className="max-w-lg mx-auto space-y-6">
           <LiquidGlassContainer className="w-full h-200 flex flex-col p-4 overflow-y-auto rounded-4xl">
             <div className="flex-1 space-y-2 text-white/80">
-              {Array.from({ length: 100 }).map((_, i) => (
-              <p key={i}>User {i % 2 === 0 ? "1" : "2"}: Message {i + 1}</p>
-            ))}
+              {/* {Array.from({ length: 100 }).map((_, i) => (
+                <p key={i}>User {i % 2 === 0 ? "1" : "2"}: Message {i + 1}</p>
+              ))} */}
+              {result}
             </div>
           </LiquidGlassContainer>
 

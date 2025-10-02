@@ -37,10 +37,6 @@ export const rag = async (url: string, query: string) => {
         .map(r => r.pageContent) 
         .join("\n\n");           
 
-    // const chat = await chatbot("", combinedText);
-
-    // return chat;
-
     return combinedText;
 
 };
