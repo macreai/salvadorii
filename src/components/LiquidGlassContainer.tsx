@@ -6,7 +6,7 @@ interface LiquidGlassContainerProps {
   ariaLabel?: string;
 }
 
-export default function LiquidGlassContainer({ children, className = '', ariaLabel = 'Liquid glass container' }: LiquidGlassContainerProps) {
+const LiquidGlassContainer = ({ children, className = '', ariaLabel = 'Liquid glass container' }: LiquidGlassContainerProps) => {
   return (
     <div
       className={`
@@ -30,3 +30,5 @@ export default function LiquidGlassContainer({ children, className = '', ariaLab
     </div>
   );
 }
+
+export default LiquidGlassContainer;
