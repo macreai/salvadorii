@@ -4,7 +4,7 @@ import { chunk } from "./chunk";
 import { collect } from "./collect";
 import { store } from "./store_embed";
 
-export const rag = async (url: string, query: string) => {
+export const rag = async (url: string) => {
 
     let vectorStore: MemoryVectorStore
     let texts: string[]
@@ -27,16 +27,7 @@ export const rag = async (url: string, query: string) => {
     }
 
     vectorStore = await store(texts);
-    
-    const results = await vectorStore.similaritySearch(
-        query,
-        5
-    );
 
-    const combinedText = results
-        .map(r => r.pageContent) 
-        .join("\n\n");           
-
-    return combinedText;
+    return vectorStore;
 
 };

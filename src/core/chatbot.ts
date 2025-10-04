@@ -1,9 +1,10 @@
 import { EventEmitter } from "events";
-import { rag } from "./rag";
+import type { MemoryVectorStore } from "langchain/vectorstores/memory";
 
 declare const LanguageModel: any;
 
-const initChatbot = async () => {
+export const initChatbot = async () => {
+    
     const emitter = new EventEmitter();
 
     const session = await LanguageModel.create({
@@ -14,31 +15,43 @@ const initChatbot = async () => {
         },
         initialPrompts: [
             { role: 'system', content: 'You are a helpful and friendly documentation assistant.' },
+        ],
+        expectedInputs: [
+            { type: "text", languages: ["en"] }
+        ],
+        expectedOutputs: [
+            { type: "text", languages: ["en"] }
         ]
     });
 
     return { session, emitter };
 };
 
-export const chatBot = async (url: string, query: string) => {
+export const chatBot = async (session: any, query: string, vectorStore: MemoryVectorStore) => {
 
-    const { session, emitter } = await initChatbot();
+    const results = await vectorStore.similaritySearch(
+        query,
+        5
+    );
 
-    const context = await rag(url, query);
+    const context = results
+        .map(r => r.pageContent) 
+        .join("\n\n");      
 
     const prompt = `
-        Use this context to answer the question.
-        If you are not sure, just say "I do not know"
+        Use this documentation to answer the question.
+        You may add your base knowledge to answer.
 
-        Context : ${context}
+        Documentation : ${context}
 
         Question : ${query}
     `;
 
     const result = await session.prompt(prompt);
 
-    return { result, emitter };
+    return result;
 }
+
 // use example
 // const { session, emitter } = await chatbot();
 
