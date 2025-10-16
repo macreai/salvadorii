@@ -18,11 +18,8 @@ export const rag = async (url: string) => {
     } else {
 
         const docs = await (await collect(url)).load();
-
         const chunked = chunk(docs);
-
         texts = (await chunked).map(c => c.pageContent)
-        
         await storage.setItem(url, texts)
     }
 

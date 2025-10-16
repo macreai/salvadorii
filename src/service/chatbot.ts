@@ -51,10 +51,3 @@ export const chatBot = async (session: any, query: string, vectorStore: MemoryVe
 
     return result;
 }
-
-// use example
-// const { session, emitter } = await chatbot();
-
-// emitter.on("progress", (e) => {
-//     console.log("Progress dari luar:", e.loaded);
-// });

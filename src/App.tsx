@@ -3,20 +3,34 @@ import IconUrl from './components/IconUrl';
 import ChatRoom from './components/ChatRoom';
 import UserInput from './components/UserInput';
 import Credit from './components/Credit';
+import { useStore } from './model/zustand';
+import { useApp } from './useApp';
 
 function App() {
+
+  const { input, setInput, inputRef, queryPrompt } = useApp();
+  const { addToChats, chats, progressState } = useStore();
+
 
   return (
     <div className="flex flex-col">
       <main className="flex-1">
         <IconUrl />
         <div className="max-w-lg mx-auto space-y-6">
-          <ChatRoom />
-          <UserInput />
+          <ChatRoom
+            chats={chats}
+            progressState={progressState}
+          />
+          <UserInput
+            addToChats={addToChats}
+            input={input}
+            setInput={setInput}
+            inputRef={inputRef}
+            queryPrompt={queryPrompt}
+          />
         </div>
        <Credit />
       </main>
-
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { pipeline, env, type ProgressCallback } from "@huggingface/transformers";
 import type { EmbeddingsInterface } from "@langchain/core/embeddings";
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
+import { useStore } from "../model/zustand";
 
 env.useBrowserCache = true;
 env.cacheDir = "";
@@ -13,20 +14,26 @@ env.backends.onnx.wasm!.numThreads = 1;
 
 export let extractor: any | null = null;
 
+const { setProgressState } = useStore.getState();
+
 const progressCallback: ProgressCallback = (progressInfo) => {
     
     switch (progressInfo.status) {
         case 'initiate':
         console.log(`[INIT] Starting download: ${progressInfo.file}`);
+        setProgressState("initiate");
         break;
         case 'progress':
         console.log(`[DOWNLOAD] ${progressInfo.file}: ${Math.round(progressInfo.progress * 100)}%`);
+        setProgressState("progress");
         break;
         case 'done':
         console.log(`[DONE] ${progressInfo.file} downloaded`);
+        setProgressState("done");
         break;
         case 'ready':
         console.log(`[READY] Pipeline is ready`);
+        setProgressState("ready");
         break;
     }
 };
@@ -56,12 +63,14 @@ class HFEmbeddings implements EmbeddingsInterface {
 export const store = async (chunks: string[]) => {
     if (!extractor) {
         console.log("[EXT] Model not loaded, loading...");
+        setProgressState("Model not loaded, loading...");
         extractor = await pipeline("feature-extraction", "Xenova/bge-base-en-v1.5", {
             device: "wasm",
             dtype: "auto",
             progress_callback: progressCallback,
         });
         console.log("[EXT] Model ready");
+        setProgressState("Model Ready");
     }
 
     const embeddings = new HFEmbeddings(extractor);

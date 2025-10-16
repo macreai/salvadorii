@@ -4,6 +4,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Copy } from "lucide-react";
 import type { ChatBubbleProps } from "../../model/interfaces";
+import type { CodeProps } from "../../model/interfaces";
 
 const wrapTextByWords = (text: string, maxLen: number): string => {
   const words = text.split(" ");
@@ -44,12 +45,6 @@ const wrapCodeLines = (code: string, maxLen: number): string => {
   return wrappedLines.join("\n");
 };
 
-interface CodeProps {
-  inline?: boolean;
-  className?: string;
-  children?: React.ReactNode;
-}
-
 const ChatBubble: React.FC<ChatBubbleProps> = ({ content }) => {
   const [copied, setCopied] = useState(false);
 
@@ -72,6 +67,8 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ content }) => {
           border border-white/20 shadow-lg text-left
         `}
       >
+        <p>ARDA</p>
+        <hr/>
         <button
           onClick={() => handleCopy(content)}
           className="absolute top-2 right-2 p-1 rounded-md hover:bg-white/20 transition"

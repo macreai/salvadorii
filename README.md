@@ -45,4 +45,4 @@ bun install
 ```shell
 bun run build
 ```
-5. Open your [chrome extension](chrome://extensions/), Click ****"Load Unpacked"**** and and select the project's build folder
+5. Open your [chrome extension](chrome://extensions/), Click ****"Load Unpacked"**** and select the project's build folder
