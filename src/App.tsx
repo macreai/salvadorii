@@ -3,14 +3,11 @@ import IconUrl from './components/IconUrl';
 import ChatRoom from './components/ChatRoom';
 import UserInput from './components/UserInput';
 import Credit from './components/Credit';
-import { useStore } from './model/zustand';
 import { useApp } from './useApp';
 
 function App() {
 
-  const { input, setInput, inputRef, queryPrompt } = useApp();
-  const { addToChats, chats, progressState } = useStore();
-
+  const { input, setInput, inputRef, queryPrompt, addToChats, chats, progressState } = useApp();
 
   return (
     <div className="flex flex-col">

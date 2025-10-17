@@ -7,11 +7,11 @@ export const useApp = () => {
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [progress, setProgress] = useState(0);
-
-  const { setUrl, url, addToChats } = useStore();
-
   const [session, setSession] = useState<any>(null);
   const [vs, setVs] = useState<any>(null);
+
+  const { setUrl, url, addToChats, chats, progressState } = useStore();
+
 
   useEffect(() => {
     const init = async () => {
@@ -45,5 +45,5 @@ export const useApp = () => {
     init();
   }, []);
 
-  return { input, setInput, inputRef, queryPrompt, progress };
+  return { input, setInput, inputRef, queryPrompt, progress, addToChats, chats, progressState };
 };
