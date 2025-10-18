@@ -9,9 +9,9 @@ export const useApp = () => {
   const [progress, setProgress] = useState(0);
   const [session, setSession] = useState<any>(null);
   const [vs, setVs] = useState<any>(null);
+  const [emoji, setEmoji] = useState<string>("");
 
   const { setUrl, url, addToChats, chats, progressState } = useStore();
-
 
   useEffect(() => {
     const init = async () => {
@@ -45,5 +45,22 @@ export const useApp = () => {
     init();
   }, []);
 
-  return { input, setInput, inputRef, queryPrompt, progress, addToChats, chats, progressState };
+  useEffect(() => {
+    const lastChat = chats[chats.length - 1];
+
+    if (lastChat && lastChat.fromAi === false) {
+      setEmoji('/thinking.png');
+    } else if (lastChat && lastChat.fromAi === true) {
+      setEmoji('/answer.png');
+    } else if (progressState === "I am Ready!") {
+      setEmoji('/logo.png');
+    } else {
+      setEmoji('/initiate.png');
+    }
+    
+  }, [progressState, chats]);
+
+
+
+  return { input, setInput, inputRef, queryPrompt, progress, addToChats, chats, progressState, url, emoji };
 };

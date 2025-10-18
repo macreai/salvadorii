@@ -30,3 +30,8 @@ export interface ChatRoomProps {
   chats: ChatBubbleProps[]
   progressState: string
 }
+
+export interface IconUrlProps {
+  url: string
+  emoji: string
+}

@@ -21,19 +21,19 @@ const progressCallback: ProgressCallback = (progressInfo) => {
     switch (progressInfo.status) {
         case 'initiate':
         console.log(`[INIT] Starting download: ${progressInfo.file}`);
-        setProgressState("initiate");
+        setProgressState("[INIT] Initiate Salvadorii...");
         break;
         case 'progress':
         console.log(`[DOWNLOAD] ${progressInfo.file}: ${Math.round(progressInfo.progress * 100)}%`);
-        setProgressState("progress");
+        setProgressState("[DOWNLOADING] Initiate Salvadorii...");
         break;
         case 'done':
         console.log(`[DONE] ${progressInfo.file} downloaded`);
-        setProgressState("done");
+        setProgressState("[DOWNLOAD FINISH] Initiate Salvadorii...");
         break;
         case 'ready':
         console.log(`[READY] Pipeline is ready`);
-        setProgressState("ready");
+        setProgressState("Preparing Salvadorii...");
         break;
     }
 };
@@ -63,14 +63,14 @@ class HFEmbeddings implements EmbeddingsInterface {
 export const store = async (chunks: string[]) => {
     if (!extractor) {
         console.log("[EXT] Model not loaded, loading...");
-        setProgressState("Model not loaded, loading...");
+        setProgressState("Salvadorii not loaded, loading...");
         extractor = await pipeline("feature-extraction", "Xenova/bge-base-en-v1.5", {
             device: "wasm",
             dtype: "auto",
             progress_callback: progressCallback,
         });
         console.log("[EXT] Model ready");
-        setProgressState("Model Ready");
+        setProgressState("I am Ready!");
     }
 
     const embeddings = new HFEmbeddings(extractor);

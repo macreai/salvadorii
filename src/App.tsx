@@ -7,12 +7,15 @@ import { useApp } from './useApp';
 
 function App() {
 
-  const { input, setInput, inputRef, queryPrompt, addToChats, chats, progressState } = useApp();
+  const { input, setInput, inputRef, queryPrompt, addToChats, chats, progressState, url, emoji } = useApp();
 
   return (
     <div className="flex flex-col">
       <main className="flex-1">
-        <IconUrl />
+        <IconUrl 
+          url={url}
+          emoji={emoji}
+        />
         <div className="max-w-lg mx-auto space-y-6">
           <ChatRoom
             chats={chats}

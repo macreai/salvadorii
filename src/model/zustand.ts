@@ -6,12 +6,10 @@ type Store = {
     progress: number
     chats: ChatBubbleProps[]
     progressState: string
-    thinking: boolean
 
     setUrl: () => void
     addToChats: (chat: ChatBubbleProps) => void;
     setProgressState: (progressState: string) => void
-    setThinking: (isThinking: boolean) => void
 }
 
 export const useStore = create<Store>()((set) => ({
@@ -19,7 +17,6 @@ export const useStore = create<Store>()((set) => ({
     progress: 0,
     chats: [],
     progressState: "",
-    thinking: false,
 
     setUrl: () => {
         chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
@@ -30,14 +27,14 @@ export const useStore = create<Store>()((set) => ({
         });
     },
 
-    addToChats: (chat) => set((state) => ({ chats: chat ? [...state.chats, chat] : state.chats,})),
+    addToChats: (chat) =>
+        set((state) => ({
+            chats: [...state.chats, chat],
+        })),
+
 
     setProgressState: (progressState: string) => {
         set({ progressState: progressState});
-    },
-
-    setThinking: (isThinking) => { // not yet implemented
-        set({ thinking: isThinking })
     }
 
 }));

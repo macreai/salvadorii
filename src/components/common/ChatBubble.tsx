@@ -45,7 +45,7 @@ const wrapCodeLines = (code: string, maxLen: number): string => {
   return wrappedLines.join("\n");
 };
 
-const ChatBubble: React.FC<ChatBubbleProps> = ({ content }) => {
+const ChatBubble: React.FC<ChatBubbleProps> = ({ content, fromAi }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async (text: string) => {
@@ -59,23 +59,29 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ content }) => {
   };
 
   return (
-    <div className="w-full flex justify-center">
+    <div className={`w-full flex ${fromAi ? "justify-start" : "justify-end"}`}>
       <div
         className={`
           relative max-w-2xl w-full p-4 rounded-3xl 
           backdrop-blur-md bg-white/10 text-white
-          border border-white/20 shadow-lg text-left
+          border border-white/20 shadow-lg
         `}
       >
-        <p>ARDA</p>
-        <hr/>
-        <button
-          onClick={() => handleCopy(content)}
-          className="absolute top-2 right-2 p-1 rounded-md hover:bg-white/20 transition"
-          title="Copy all"
-        >
-          <Copy size={16} />
-        </button>
+        <p className={`text-sm mb-2 ${fromAi ? "text-left" : "text-right"}`}>
+          {fromAi ? "Salvadorii" : "You"}
+        </p>
+
+        <div className="relative flex items-center mb-3">
+          <hr className="flex-grow border-t border-white/20" />
+          <button
+            onClick={() => handleCopy(content)}
+            className="ml-3 flex items-center gap-1 text-xs text-white/70 hover:text-white transition"
+            title="Copy message"
+          >
+            <Copy size={14} />
+            {copied ? "Copied!" : "Copy"}
+          </button>
+        </div>
 
         <ReactMarkdown
           components={{
@@ -136,12 +142,6 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ content }) => {
         >
           {content}
         </ReactMarkdown>
-
-        {copied && (
-          <span className="absolute bottom-2 right-2 text-xs text-green-400">
-            Copied!
-          </span>
-        )}
       </div>
     </div>
   );
