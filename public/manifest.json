@@ -22,5 +22,11 @@
       ],
       "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "icons": {
+    "16": "avatar/icons/logo-16.png",
+    "32": "avatar/icons/logo-32.png",
+    "48": "avatar/icons/logo-48.png",
+    "128": "avatar/icons/logo-128.png"
+  }
 }

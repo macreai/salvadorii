@@ -49,15 +49,15 @@ export const useApp = () => {
     const lastChat = chats[chats.length - 1];
 
     if (lastChat && lastChat.fromAi === false) {
-      setEmoji('/thinking.png');
+      setEmoji('avatar/thinking.png');
     } else if (lastChat && lastChat.fromAi === true) {
-      setEmoji('/answer.png');
+      setEmoji('avatar/answer.png');
     } else if (progressState === "I am Ready!") {
-      setEmoji('/logo.png');
+      setEmoji('avatar/logo.png');
     } else {
-      setEmoji('/initiate.png');
+      setEmoji('avatar/initiate.png');
     }
-    
+
   }, [progressState, chats]);
 
 
