@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import type { LiquidGlassContainerProps } from '../../model/interfaces';
 
 const LiquidGlassContainer = forwardRef<HTMLDivElement, LiquidGlassContainerProps>(
-  ({ children, className = '', ariaLabel = 'Liquid glass container', onClick }, ref) => {
+  ({ children, className = '', ariaLabel = 'Liquid glass container', onClick, title }, ref) => {
     return (
       <div
         className={`
@@ -14,6 +14,7 @@ const LiquidGlassContainer = forwardRef<HTMLDivElement, LiquidGlassContainerProp
         role="group"
         aria-label={ariaLabel}
         onClick={onClick}
+        title={title}
         ref={ref}
       >
         <div className="pointer-events-none absolute inset-0 rounded-2xl border border-white/10" />

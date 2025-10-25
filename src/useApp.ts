@@ -11,12 +11,13 @@ export const useApp = () => {
   const [vs, setVs] = useState<any>(null);
   const [emoji, setEmoji] = useState<string>("");
 
-  const { setUrl, url, addToChats, chats, progressState } = useStore();
+  const { setUrl, url, addToChats, chats, progressState, setProgressState } = useStore();
 
   useEffect(() => {
     const init = async () => {
       const vsInstance = await rag(url);
       setVs(vsInstance);
+      setProgressState("I am Ready!")
     };
 
     init();
@@ -50,10 +51,14 @@ export const useApp = () => {
 
     if (lastChat && lastChat.fromAi === false) {
       setEmoji('avatar/thinking.png');
+      setProgressState('Thinking..')
     } else if (lastChat && lastChat.fromAi === true) {
       setEmoji('avatar/answer.png');
+      setProgressState('Gotcha!')
     } else if (progressState === "I am Ready!") {
       setEmoji('avatar/logo.png');
+    } else if (progressState === "Getting document..") {
+      setEmoji('avatar/tired.png');
     } else {
       setEmoji('avatar/initiate.png');
     }
@@ -62,5 +67,5 @@ export const useApp = () => {
 
 
 
-  return { input, setInput, inputRef, queryPrompt, progress, addToChats, chats, progressState, url, emoji };
+  return { input, setInput, inputRef, queryPrompt, progress, addToChats, chats, progressState, url, emoji, setUrl };
 };

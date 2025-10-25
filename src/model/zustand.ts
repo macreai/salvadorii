@@ -25,6 +25,7 @@ export const useStore = create<Store>()((set) => ({
                 set({ url: activeTab.url })
             }
         });
+        set({ progressState: "Getting document.."});
     },
 
     addToChats: (chat) =>

@@ -5,6 +5,7 @@ export interface LiquidGlassContainerProps {
   className?: string;
   ariaLabel?: string;
   onClick?: () => void;
+  title?: string
 }
 
 export interface ChatBubbleProps {
@@ -27,11 +28,12 @@ export interface UserInputProps {
 }
 
 export interface ChatRoomProps {
-  chats: ChatBubbleProps[]
-  progressState: string
+  chats: ChatBubbleProps[];
 }
 
 export interface IconUrlProps {
-  url: string
-  emoji: string
+  url: string;
+  emoji: string;
+  progressState: string;
+  setUrl: () => void;
 }

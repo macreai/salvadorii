@@ -7,7 +7,7 @@ import { useApp } from './useApp';
 
 function App() {
 
-  const { input, setInput, inputRef, queryPrompt, addToChats, chats, progressState, url, emoji } = useApp();
+  const { input, setInput, inputRef, queryPrompt, addToChats, chats, progressState, url, emoji, setUrl } = useApp();
 
   return (
     <div className="flex flex-col">
@@ -15,11 +15,12 @@ function App() {
         <IconUrl 
           url={url}
           emoji={emoji}
+          progressState={progressState}
+          setUrl={setUrl}
         />
         <div className="max-w-lg mx-auto space-y-6">
           <ChatRoom
             chats={chats}
-            progressState={progressState}
           />
           <UserInput
             addToChats={addToChats}

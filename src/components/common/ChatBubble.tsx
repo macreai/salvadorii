@@ -64,7 +64,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ content, fromAi }) => {
         className={`
           relative max-w-2xl w-full p-4 rounded-3xl 
           backdrop-blur-md bg-white/10 text-white
-          border border-white/20 shadow-lg
+          border border-white/20 shadow-lg text-left
         `}
       >
         <p className={`text-sm mb-2 ${fromAi ? "text-left" : "text-right"}`}>
