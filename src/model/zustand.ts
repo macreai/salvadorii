@@ -19,13 +19,14 @@ export const useStore = create<Store>()((set) => ({
     progressState: "",
 
     setUrl: () => {
+        set({ progressState: "Getting document.."});
+        
         chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
             const activeTab = tabs[0];
             if (activeTab.url) {
                 set({ url: activeTab.url })
             }
         });
-        set({ progressState: "Getting document.."});
     },
 
     addToChats: (chat) =>
